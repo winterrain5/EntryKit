@@ -1,0 +1,16 @@
+PODS:
+  - EntryKit (0.1.0)
+
+DEPENDENCIES:
+  - EntryKit (from `../`)
+
+EXTERNAL SOURCES:
+  EntryKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EntryKit: 4b95a0ea3c46466c181a9431a77bbb3c5f8b4a5a
+
+PODFILE CHECKSUM: 5bf67c1be71e9a20776cde36e965556cf74f4469
+
+COCOAPODS: 1.10.0.rc.1
