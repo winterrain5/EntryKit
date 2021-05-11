@@ -7,18 +7,18 @@
 
 private let kScreenHeight:CGFloat = UIScreen.main.bounds.size.height
 
-enum EntryStyle {
+public enum EntryStyle {
     case sheet
     case alert
 }
 
-class EntryKit:UIView {
+open class EntryKit:UIView {
     private static let animateDuration:TimeInterval = 0.5
     private static let animateDamping:CGFloat = 0.9
     private static let animateVelocity:CGFloat = 2
     private static var style:EntryStyle = .alert
     private static var childView: UIView!
-    static func display(view:UIView,
+    public static func display(view:UIView,
                         size:CGSize,
                         style:EntryStyle,
                         backgroundColor:UIColor = UIColor.black.withAlphaComponent(0.3)) {
@@ -44,7 +44,7 @@ class EntryKit:UIView {
         }
     }
     
-    static func dismiss() {
+    public static func dismiss() {
         let superView = UIApplication.shared.keyWindow?.subviews.last
         if !(superView?.isKind(of: EntryKit.self) ?? false) {
             return
@@ -103,7 +103,7 @@ class EntryKit:UIView {
         }, completion: nil)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         EntryKit.dismiss()
     }
     
