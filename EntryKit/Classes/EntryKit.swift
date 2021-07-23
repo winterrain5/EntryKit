@@ -4,6 +4,8 @@
 //
 //  Created by VICTOR03 on 2021/5/9.
 //
+import UIKit
+import Foundation
 
 private let kScreenHeight:CGFloat = UIScreen.main.bounds.size.height
 
@@ -104,7 +106,11 @@ open class EntryKit:UIView {
     }
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        EntryKit.dismiss()
+        let point = touches.first?.location(in: self) ?? .zero
+        if point.y < EntryKit.childView.frame.minY {
+            EntryKit.dismiss()
+        }
+        
     }
     
 }
