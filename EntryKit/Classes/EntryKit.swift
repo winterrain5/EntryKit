@@ -50,11 +50,13 @@ open class EntryKit:UIView {
                                backgroundColor:UIColor,
                                touchDismiss:Bool) {
         let superView = UIApplication.shared.keyWindow
-        if superView?.subviews.contains(view) ?? false {
+        if (superView?.subviews.last?.isKind(of: EntryKit.self) ?? false) {
             return
         }
+        
         EntryKit.style = style
         EntryKit.childView = view
+        EntryKit.touchDismiss = touchDismiss
         
         let container = EntryKit()
         container.frame = UIScreen.main.bounds
@@ -132,10 +134,11 @@ open class EntryKit:UIView {
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let point = touches.first?.location(in: self) ?? .zero
-        if point.y < EntryKit.childView.frame.minY {
-            EntryKit.dismiss()
+        if EntryKit.touchDismiss {
+            if !EntryKit.childView.frame.contains(point) {
+                EntryKit.dismiss()
+            }
         }
-        
     }
     
 }
