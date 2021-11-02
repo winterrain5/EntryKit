@@ -19,11 +19,36 @@ open class EntryKit:UIView {
     private static let animateDamping:CGFloat = 0.9
     private static let animateVelocity:CGFloat = 2
     private static var style:EntryStyle = .alert
+    private static var touchDismiss:Bool = true
     private static var childView: UIView!
+    
     public static func display(view:UIView,
-                        size:CGSize,
-                        style:EntryStyle,
-                        backgroundColor:UIColor = UIColor.black.withAlphaComponent(0.3)) {
+                               size:CGSize,
+                               style:EntryStyle,
+                               backgroundColor:UIColor,
+                               touchDismiss:Bool) {
+        innerDisplay(view: view, size: size, style: style, backgroundColor:backgroundColor,touchDismiss: touchDismiss)
+    }
+    
+    public static func display(view:UIView,
+                               size:CGSize,
+                               style:EntryStyle,
+                               touchDismiss:Bool) {
+        innerDisplay(view: view, size: size, style: style, backgroundColor: UIColor.black.withAlphaComponent(0.5),touchDismiss: touchDismiss)
+    }
+    
+    public static func display(view:UIView,
+                               size:CGSize,
+                               style:EntryStyle) {
+        innerDisplay(view: view, size: size, style: style, backgroundColor: UIColor.black.withAlphaComponent(0.5),touchDismiss: true)
+        
+    }
+    
+    private static func innerDisplay(view:UIView,
+                               size:CGSize,
+                               style:EntryStyle,
+                               backgroundColor:UIColor,
+                               touchDismiss:Bool) {
         let superView = UIApplication.shared.keyWindow
         if superView?.subviews.contains(view) ?? false {
             return
@@ -89,7 +114,7 @@ open class EntryKit:UIView {
                        initialSpringVelocity: EntryKit.animateVelocity,
                        options: .curveEaseIn,
                        animations: {
-                view.transform = CGAffineTransform.identity
+            view.transform = CGAffineTransform.identity
         }, completion: nil)
     }
     
